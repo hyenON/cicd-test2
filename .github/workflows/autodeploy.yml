@@ -6,9 +6,9 @@ on:
       - main
 
 jobs:
+
   build-job:
     runs-on: ubuntu-latest
-
     steps:
       - name: github repository 소스 가져오기
         uses: actions/checkout@v4
@@ -37,10 +37,12 @@ jobs:
           ls -al
 
   deploy-job:
+    needs: build-job
     runs-on: ubuntu-latest
-      
+
+    steps:
       - name: scp를 이용해서 app.jar 실행 파일을 ec2로 전송하기
-        uses: appleboy/scp-action@v0.1.17
+        username: appleboy/scp-action@v0.1.17
         with:
           host: ${{secrets.EC2_HOST}}
           user: ${{secrets.EC2_USER}}
