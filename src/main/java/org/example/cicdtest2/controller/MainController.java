@@ -6,7 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MainController {
     @GetMapping
-    public String main() {
-        return "This is cicd test 2 --- auto deployment with gitlab actions";
+    public String hello() {
+
+        return "This is cicd test 2 --- auto deployment with gitlab actions -- version 2.0";
     }
 }
