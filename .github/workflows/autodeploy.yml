@@ -37,7 +37,7 @@ jobs:
           ls -al
 
       - name: scp를 이용해서 app.jar 실행 파일을 ec2로 전송하기
-        uses: appleboy/scp-action@v0.1.17
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
           user: ${{ secrets.EC2_USER }}
