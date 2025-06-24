@@ -10,5 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name : test
-        run: echo "test"
+      - name : github repository 소스 가져오기
+        uses: action/checkout@4
+
+      - name: JDK17 설치하기
+        uses: action/setup-java@4
+        with:
+          distribution: temurin
+          java-version: 17

@@ -1,1 +1,3 @@
-spring.application.name=cicd-test2
+user:
+  key: aaa
+  password: 1111
