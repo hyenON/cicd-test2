@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  My-Auto-CICD-Job:
+  build-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,3 +18,13 @@ jobs:
         with:
           distribution: temurin
           java-version: 17
+
+      - name: application yml 추가
+        run: |
+          mkdir -p src/main/resources || true
+          echo "${{secrets.APPLICATION_YML}}" > ./src/main/resources/application.yml
+          ls -al ./src/main/resources/
+          cat ./src/main/resources/application.yml
+
+  deploy-jobs:
+      runs-on: ubuntu-latest
