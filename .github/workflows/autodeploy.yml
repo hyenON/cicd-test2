@@ -45,22 +45,23 @@ jobs:
           source: ./app.jar
           target: /home/ubuntu/prod/tobe
 
+  deploy-job:
+    needs: build-job   # build-job이 완료되면 진행
+    runs-on: ubuntu-latest
 
-
-#  deploy-job:
-#    needs: build-job
-#    runs-on: ubuntu-latest
-#
-#    steps:
-#      - name: scp를 이용해서 app.jar 실행 파일을 ec2로 전송하기
-#        uses: appleboy/scp-action@v0.1.17
-#        with:
-#          host: ${{ secrets.EC2_HOST }}
-#          user: ${{ secrets.EC2_USER }}
-#          key: ${{ secrets.EC2_KEY }}
-#          source: ./app.jar
-#          target: /home/ubuntu/prod/tobe
-
+    steps:
+      - name: 현재 실행중인 프로세스 대신 새로운 app.jar 실행 (EC2 ssh 원격접속)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          user: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            rm /home/ubuntu/prod/cur/app.jar
+            mv /home/ubuntu/prod/tobe/app.jar /home/ubuntu/prod/cur/app.jar
+            cd /home/ubuntu/prod/cur/
+            sudo fuser -k -n tcp 8080 || true
+            sudo nohup java -jar app.jar > ./output.log 2>&1 &
 
 
 
