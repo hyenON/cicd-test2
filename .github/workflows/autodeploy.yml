@@ -33,7 +33,7 @@ jobs:
 
       - name: 빌드된 jar 파일 이름 변경 및 이동
         run: |
-          mv ./build/libs/*SNAPSHOT.jar ./app/jar
+          mv ./build/libs/*SNAPSHOT.jar ./app.jar
           ls -al
 
 #  deploy-jobs:
