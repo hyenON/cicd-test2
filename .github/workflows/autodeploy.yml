@@ -26,5 +26,15 @@ jobs:
           ls -al ./src/main/resources/
           cat ./src/main/resources/application.yml
 
+      - name: jar(실행) 파일 생성하기
+        run: |
+          chomd +x ./gradlew  #실행 권한 추가 
+          ./gradlew clean build  #기존 실행 파일 삭제 후 재생성
+
+      - name: 빌드된 jar 파일 이름 변경 및 이동
+        run: |
+          move ./build/libs/*SNAPSHOT.jar ./app/jar
+          ls -al
+
 #  deploy-jobs:
 #      runs-on: ubuntu-latest
