@@ -36,6 +36,9 @@ jobs:
           mv ./build/libs/*SNAPSHOT.jar ./app.jar
           ls -al
 
+  deploy-job:
+    runs-on: ubuntu-latest
+      
       - name: scp를 이용해서 app.jar 실행 파일을 ec2로 전송하기
         uses: appleboy/scp-action@v0.1.17
         with:
@@ -44,7 +47,6 @@ jobs:
           key: ${{secrets.EC2_KEY}}
           source: ./app.jar
           target: /home/ubuntu/prod/tobe
-
 
 
 
